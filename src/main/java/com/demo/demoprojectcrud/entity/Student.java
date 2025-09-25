@@ -23,4 +23,6 @@ public class Student {
     private String studentPhone;
     private String studentAddress;
     private String studentCourse;
+    private String studentRollNumber;
+    private int studentAge;
 }
