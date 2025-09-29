@@ -7,7 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StudentMapper {
-    public StudentResponseDTO toDTO(Student student, ModelMapper modelMapper) {
+    private final ModelMapper modelMapper;
+
+    public StudentMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+    public StudentResponseDTO toDTO(Student student) {
         return modelMapper.map(student, StudentResponseDTO.class);
     }
 }
