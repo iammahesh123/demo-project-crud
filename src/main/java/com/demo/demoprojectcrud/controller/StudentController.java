@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-
+@RequestMapping("/student")
 public class StudentController {
 
     private final StudentService studentService;
@@ -17,16 +17,20 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @PostMapping("/student")
+    @PostMapping
     public ResponseEntity<StudentResponseDTO> createStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
         return ResponseEntity.ok(studentService.createStudent(studentRequestDTO));
     }
+//
+@PutMapping("/{id}")
+public ResponseEntity<StudentResponseDTO> updateStudent(@PathVariable Long id, @RequestBody StudentRequestDTO studentRequestDTO) {
 
-    @PutMapping("/{id}")
-
-    public ResponseEntity<StudentResponseDTO>updateStudent(@PathVariable Long id, @RequestBody StudentRequestDTO studentRequestDTO){
-
-        StudentResponseDTO response = studentService.updateStudent(id, studentRequestDTO);
+    StudentResponseDTO response = studentService.updateStudent(id, studentRequestDTO);
+    return ResponseEntity.ok(response);
+  }
+  @GetMapping("/{id}")
+public ResponseEntity<StudentResponseDTO> getById (@PathVariable Long id) {
+        StudentResponseDTO response = studentService.getById(id);
         return ResponseEntity.ok(response);
-    }
+ }
 }

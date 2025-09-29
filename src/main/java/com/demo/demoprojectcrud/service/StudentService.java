@@ -35,16 +35,12 @@ public class StudentService {
     public StudentResponseDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO){
         Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
         BeanUtils.copyProperties(studentRequestDTO, student);
-
-        student.setStudentName(studentRequestDTO.getStudentName());
-        student.setStudentEmail(studentRequestDTO.getStudentEmail());
-        student.setStudentPhone(studentRequestDTO.getStudentPhone());
-        student.setStudentAddress(studentRequestDTO.getStudentAddress());
-        student.setStudentCourse(studentRequestDTO.getStudentCourse());
-        student.setStudentRollNumber(studentRequestDTO.getStudentRollNumber());
-        student.setStudentAge(studentRequestDTO.getStudentAge());
-
         Student updatedStudent = studentRepository.save(student);
         return studentMapper.toDTO(updatedStudent);
+    }
+
+    public StudentResponseDTO getById(Long id){
+        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
+        return studentMapper.toDTO(student);
     }
 }
