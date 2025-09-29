@@ -43,4 +43,10 @@ public class StudentService {
         Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
         return studentMapper.toDTO(student);
     }
+
+    public StudentResponseDTO deleteById(Long id){
+        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student Not Found"));
+        studentRepository.delete(student);
+        return studentMapper.toDTO(student);
+    }
 }
